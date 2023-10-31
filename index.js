@@ -27,7 +27,8 @@ app.get('/api/v1/pets', (req, res) => {
 });
 
 // get pet by owner with query string
-app.get('/api/v1/pets/owner', (req, res) => {
+app.get('/api/v1/pets/:owner', (req, res) => {
+    const owner = req.params.owner;
     // get the owner from the request
 
 
@@ -35,6 +36,7 @@ app.get('/api/v1/pets/owner', (req, res) => {
     const pet = pets.find(pet => pet.owner === owner);
 
     // send the pet as a response
+    res.json(pet);
 
 });
 
