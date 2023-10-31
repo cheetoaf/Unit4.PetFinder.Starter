@@ -5,10 +5,11 @@ const pets = require('./data');
 const express = require('express');
 const app = express();
 
-const PORT = 8080;
+const PORT = 8000;
 
 // GET - / - returns homepage
 app.get('/', (req, res) => {
+    res.sendFile(path.join(_dirname, 'public', 'index.html'));
     // serve up the public folder as static index.html file
 
 });
@@ -20,6 +21,7 @@ app.get('/api', (req, res) => {
 
 // get all pets from the database
 app.get('/api/v1/pets', (req, res) => {
+   res.json(pets);
     // send the pets array as a response
 
 });
@@ -38,6 +40,7 @@ app.get('/api/v1/pets/owner', (req, res) => {
 
 // get pet by name
 app.get('/api/v1/pets/:name', (req, res) => {
+  const name = req.params.name;
     // get the name from the request
 
 
@@ -45,7 +48,7 @@ app.get('/api/v1/pets/:name', (req, res) => {
     const pet = pets.find(pet => pet.name === name);
 
     // send the pet as a response
-
+   res.json(pet);
 });
 
 app.listen(PORT, () => {
